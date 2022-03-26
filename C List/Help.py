@@ -1,4 +1,4 @@
-'''
+"""
 FUNCTIONS -
 
 create - create new list (Null, A, B, C...cap at 26 lists)
@@ -16,9 +16,9 @@ display {letter} - print contents of specific list
 transfer - Adds value from the list after Null (typically A) to Null
     transfer (-o) {original list} - transfers last value of original to Null
     transfer (-ot) {original list} {target list} - transfers last value of original to target
-    transfer (-oi) {original list} {index} - transfers specific value of orignal to Null
+    transfer (-oi) {original list} {index} - transfers specific value of original to Null
     transfer (-oti) {original list} {target list} {indexes}
-        # like -ot but you get to specify indexes of both orignal and target
+        # like -ot, but you get to specify indexes of both original and target
     transfer (-t) {target list} - transfers last value of default list (typically A) to target
     transfer (-ti) {target list} {index} - transfers last value of default list to specific index of target
 
@@ -30,7 +30,8 @@ clear - clears terminal screen. For viewing pleasure and ease.
 
 trash - clear Null
 
-'''
+"""
+
 
 def mainHelp():
     print()
@@ -46,7 +47,7 @@ def mainHelp():
     print("'add -h' - opens help menu for add command")
     print()
     print("'display' - prints contents of all lists")
-    print("'display {listname}' - print contents of specific list")
+    print("'display {list name}' - print contents of specific list")
     print("'display -o' - organizes list display")
     print("'display -h' - opens help menu for display command")
     print()
@@ -69,12 +70,13 @@ def mainHelp():
     print("'trash' - clean Null list. Think of Null as a recycle bin.")
     print()
     print()
-    
+
+
 def createHelp():
     print()
     print("'create' - creates a new list for user to manipulate")
     print()
-    print("# First is automatically named A and each new addition goes down the alphebet.")
+    print("# First is automatically named A and each new addition goes down the alphabet.")
     print("# It goes down until Z, then does not add anymore default lists.")
     print("# Any other list will have to be a custom name.")
     print()
@@ -85,6 +87,7 @@ def createHelp():
     print("# The name is treated as a string or character. Spaces and special characters are allowed.")
     print()
     print()
+
 
 def displayHelp():
     print()
@@ -99,15 +102,16 @@ def displayHelp():
     print("#    examplelist")
     print("#        item 1, item 2, item 3...")
     print()
-    print("'display {listname}' - displays the specific list user chooses.")
+    print("'display {list name}' - displays the specific list user chooses.")
     print("#    Example is 'display A'.")
     print("# If the list does not exist, you won't get an output.")
+
 
 def addHelp():
     print()
     print("'add' - Adds the default number 0 to the default list Null")
     print()
-    print("# The basic verison of add command if executed without arguments.")
+    print("# The basic version of add command if executed without arguments.")
     print("# Numbers are always added to the end of the list")
     print()
     print("         ### Additional Info ###")
@@ -125,12 +129,13 @@ def addHelp():
     print()
     print()
 
+
 def transferHelp():
     print()
     print("'transfer' - takes the last value from one list and places it in another.")
     print("# The default list taken from is the one after Null. This would usually be the A list.")
     print("# The default target list is Null.")
-    print("# The value will be deleted from the orignal list in the processes.")
+    print("# The value will be deleted from the original list in the processes.")
     print()
     print("         ### Additional Info ###")
     print("-----------------------------------------------------------------------------")
