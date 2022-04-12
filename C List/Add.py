@@ -1,6 +1,6 @@
 def addList(lists):  # default
     lists[0].append(0)
-    print("Value", 0, "was added to list", lists[0][0])
+    print("Value", 0, "was added to the list", lists[0][0])
 
 
 def add_Specific_List(lists, listChoice):

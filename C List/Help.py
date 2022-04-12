@@ -9,6 +9,7 @@ add {list} {value} - Add a value to specified list
     add {list} - adds default value 0 to specified list
     add -i {list} - adds default value 0 to specified index on specified list
     add -i {list} {value} - Add a value to specified index on specified list
+
 display {letter} - print contents of specific list
     display - prints contents of all lists
     display -o - organizes everything

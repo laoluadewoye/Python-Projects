@@ -16,4 +16,4 @@ def showOrganized(lists):  # Display list in organized way
 
         for i in range(1, len(iterlist)):  # Print the values of the list
             print(iterlist[i], end=", ")
-        print()
+        print(" ")

@@ -82,7 +82,7 @@ def optionsCheck(optint):
     leftover = leftover.replace("i", "")
     leftover = leftover.strip()
 
-    if leftover == "":  # A valid options section would be blank by now
+    if leftover == "":  # A valid option section would be blank by now
         properOptions = True
     else:
         print("incorrect syntax.")

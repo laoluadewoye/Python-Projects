@@ -20,7 +20,7 @@ def newListCustom(name, lists):
 
 def listCap(num):
     if num > ord('Z'):  # Ensures only 26 default lists are made.
-        print("No more default lists will be created.")
+        print("No more lists with default names will be created.")
         return False
     else:
         return True

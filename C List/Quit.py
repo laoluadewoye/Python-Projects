@@ -5,6 +5,6 @@ def quitprompt():
     elif quitChoice == 'n':
         no_exit = True
     else:
-        print("please choose Y or n next time.")
+        print("Please choose Y or n next time.")
         no_exit = True
     return no_exit

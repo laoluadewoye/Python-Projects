@@ -32,7 +32,7 @@ while keepRunning:
     # Checks for characters
     isChar = False
     for char in command:
-        if char >= 'a' and char <= 'z':
+        if 'a' <= char <= 'z':
             isChar = True
 
     ###Edge error cases###
