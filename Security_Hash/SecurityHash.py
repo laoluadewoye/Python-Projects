@@ -48,7 +48,7 @@ def hashGenerator(key):
 
     # ASCII Addition
     for i in range(len(key)):
-        # Multiplies ASCII value by a number at modulated index of ASCII value
+        # Multiplies ASCII values by a number at modulated index of ASCII value
         hashNum += ord(key[i]) * modShift[(i % 9)]
 
     # Multiply and add by key length
@@ -61,6 +61,7 @@ def hashOutput(numKey):
     modShift = hashShifts(numKey)
 
     characters = ""
+    newHex = "00"
     tickDown = numKey
 
     #Key Generation
@@ -77,7 +78,12 @@ def hashOutput(numKey):
                 tickDown = tempTick
             print(tickDown, end=", ")
 
-        characters += hex(tickDown)[2:] + ","  # Add new hexadecimal
+        if newHex == hex(tickDown)[2:]:
+            newHex = hex(tickDown - (len(characters) % 15))[2:]
+            tickDown -= (len(characters) % 15)
+        else:
+            newHex = hex(tickDown)[2:]
+        characters += newHex + ","  # Add new hexadecimal
         charLength = len(characters)
         tickDown = (tickDown**(charLength % 4)) * tickDown  # Raise variable for another round
 
@@ -104,5 +110,3 @@ for hd in hexaList:
     hexaString += hd
 
 print("\nTrue Hash:", hexaString)
-
-
