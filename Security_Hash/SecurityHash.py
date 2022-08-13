@@ -52,7 +52,7 @@ def hashGenerator(key):
         hashNum += ord(key[i]) * modShift[(i % 9)]
 
     # Multiply and add by key length
-    hashNum *= keyLength
+    hashNum = hashNum * keyLength + ((ord(key[0]) + 1) * 2)
 
     return hashNum
 
@@ -65,7 +65,7 @@ def hashOutput(numKey):
     tickDown = numKey
 
     #Key Generation
-    while len(characters) < 94:
+    while len(characters) < 64:
 
         #Number countdown
         while tickDown > 254:
@@ -76,37 +76,31 @@ def hashOutput(numKey):
                 tickDown = tempTick
             else:
                 tickDown = tempTick
-            print(tickDown, end=", ")
+            #print(tickDown, end=", ")
 
         if newHex == hex(tickDown)[2:]:
             newHex = hex(tickDown - (len(characters) % 15))[2:]
             tickDown -= (len(characters) % 15)
         else:
             newHex = hex(tickDown)[2:]
-        characters += newHex + ","  # Add new hexadecimal
+        characters += newHex  # Add new hexadecimal
         charLength = len(characters)
         tickDown = (tickDown**(charLength % 4)) * tickDown  # Raise variable for another round
-
-    print()
 
     return characters
 
 
-phrase = input("Please enter any phrase as your key: ")
-print("Key:", phrase)
+def HashFunction(ph):
+    number = abs(hashGenerator(ph))  # Generate a hash number
+    hexa = hashOutput(number)  # Generate a hash string
 
-number = abs(hashGenerator(phrase))
-print("Number Hash:", number, end="\n\n")
+    print("\nHash Output:", hexa)
 
-hexa = hashOutput(number)
-print(hexa)
 
-hexaList = hexa.split(",")
-print(hexaList)
+def singleRun():
+    phrase = input("Please enter any phrase as your key: ")
+    print("Key:", phrase)
+    HashFunction(phrase)
 
-hexaString = ""
 
-for hd in hexaList:
-    hexaString += hd
-
-print("\nTrue Hash:", hexaString)
+# singleRun()
