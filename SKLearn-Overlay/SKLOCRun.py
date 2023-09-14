@@ -1,3 +1,4 @@
+from time import time
 from SKLOCMetrics import *
 from sklearn.preprocessing import (
     MaxAbsScaler,
@@ -9,6 +10,7 @@ from sklearn.preprocessing import (
     StandardScaler,
 )
 from sklearn.decomposition import PCA
+from sklearn.neighbors import NeighborhoodComponentsAnalysis
 from sklearn.model_selection import train_test_split
 
 
@@ -39,12 +41,17 @@ def Preprocessing(actDataInfo):
     elif preprocessChoice == 'Std_sclr':
         StandardScaler().fit_transform(X)
     elif preprocessChoice == 'PCA':
-        compNum = datasetMods.get('PCA_comp_count')
+        print("PCA")
+        compNum = datasetMods.get('Comp_count')
         pca = PCA(n_components=compNum)
         pca.fit(X)
-
-        # Adjust X for PCA use
         X = pca.transform(X)
+    elif preprocessChoice == 'NCA':
+        print("NCA")
+        compNum = datasetMods.get('Comp_count')
+        nca = NeighborhoodComponentsAnalysis(n_components=compNum)
+        nca.fit(X, y)
+        X = nca.transform(X)
 
     ttMethod = datasetMods.get('Train_test_option')
     if ttMethod == "Full_Set":
@@ -72,6 +79,7 @@ def Fit_Test(dataPartitions, actClassInfo):
     classifierNickname = actClassInfo[0]
     classifier = actClassInfo[1]
     y_guess = None
+    elapsed = 0
 
     while usingData:
         print('-------------------------------------------------------------------')
@@ -89,7 +97,10 @@ def Fit_Test(dataPartitions, actClassInfo):
                 testingStatus = 'Available'
                 resultStatus = 'Unavailable'
 
+                start = time()
                 classifier.fit(X_train, y_train)
+                end = time()
+                elapsed = round(end - start, 4)
                 print('|                       Fitting Complete                          |')
 
             elif choice == 2:
@@ -103,7 +114,7 @@ def Fit_Test(dataPartitions, actClassInfo):
 
             elif choice == 3:
                 if resultStatus == 'Available':
-                    Results(y_test, y_guess, classifierNickname, classifier)
+                    Results(y_test, y_guess, classifierNickname, classifier, elapsed)
                 else:
                     print('|           Results Unavailable. Please Test Algorithm            |')
             else:
@@ -135,10 +146,14 @@ def Auto_Fit_Test(dataPartitions, nameList, classList, folder):
         classifier = classList[i]
         nickname = nameList[i]
 
+        start = time()
         classifier.fit(X_train, y_train)
+        end = time()
+        elapsed = round(end - start, 6)
+
         y_guess = classifier.predict(X_test)
         specNickName = f'{nickname}_{i}'
-        resultList = Results_Return(y_test, y_guess, specNickName, classifier)
+        resultList = Results_Return(y_test, y_guess, specNickName, classifier, elapsed)
         allResults.append(resultList)
 
     setName = nameList[1] + "_SET"

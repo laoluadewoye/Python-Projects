@@ -1,8 +1,9 @@
 from os.path import isdir
+from textwrap import wrap
 from SKLOCDatasets import Dataset_Setup_Local, Dataset_Setup_Sample
 from SKLOCDataMods import Dataset_Config
 from SKLOCRun import Auto_Alg_Testing
-from SKLOCCustom.SKLOCC_RF import *
+from SKLOCCustom.SKLOCCMain import Customize_Classifier, Customize_Classifier_Batch
 
 
 def List_Classifiers(sessionClassifiers):
@@ -23,9 +24,13 @@ def List_Classifiers(sessionClassifiers):
             # Leftover half of format
             for j in range(leftoverSpace):
                 print(' ', end='')
-
             print('|')
-            print('| ' + str(mods))
+
+            # mod text wrapping - 64 per line
+            maxModLength = 60
+            modWrapped = wrap(str(mods), maxModLength)
+            for line in modWrapped:
+                print("|      " + line)
 
         print('-------------------------------------------------------------------')
         return True
@@ -54,7 +59,14 @@ def List_Datasets(sessionDatasets):
             # Leftover half of format
             for j in range(leftoverSpace):
                 print(' ', end='')
-            print('\n|       ' + str(mods))
+            print('|')
+
+            # mod text wrapping - 64 per line
+            maxModLength = 60
+            modWrapped = wrap(str(mods), maxModLength)
+            for line in modWrapped:
+                print("|      " + line)
+
         print('-------------------------------------------------------------------')
         return True
     else:
@@ -62,31 +74,6 @@ def List_Datasets(sessionDatasets):
         print('|   No Datasets created at this time. Please Create one for use.  |')
         print('-------------------------------------------------------------------')
         return False
-
-
-def Customize_Classifier_Batch(actClassInfo, batchNum):
-    classifier = actClassInfo[1]
-    classMods = actClassInfo[2]
-    classifierNum = actClassInfo[3]
-    if classifierNum == 1:
-        classList = Mod_List_RF(batchNum, classMods)
-    else:
-        classList = [classifier] * batchNum
-
-    return classList
-
-
-def Customize_Classifier(classifierNum, classifierNickname=''):
-    if classifierNum == 1:
-        if classifierNickname == '':
-            classifierNickname = input("| Name new Random Forest Algorithm: ")
-        return classifierNickname, Customization_RF()
-    else:
-        default = RandomForestClassifier()
-        print('|       Unrecognized option chosen. Using default algorithm.      |')
-        print('|        Please check current algorithms list if unwanted.        |')
-        print('-------------------------------------------------------------------')
-        return 'default', (default, {})
 
 
 def Edit_Classifiers(sessionClassifiers):
@@ -117,12 +104,17 @@ def Make_New_Classifier():
     print('|                     Choose your algorithm!                      |')
     print('|                              -----                              |')
     print('|  1. Random Forest                                               |')
+    print('|  2. K-Neighbors                                                 |')
+    print('|  3. Support Vector Machine                                      |')
+    print('|  4. Linear Support Vector Machine                               |')
+    print('|  5. Multi-layer Perceptron                                      |')
     print('-------------------------------------------------------------------')
 
     # Selection & Customization
     classifierNum = int(input('|                Enter here or 0 if you are done: '))
     nickname, classifier = Customize_Classifier(classifierNum)
 
+    print('-------------------------------------------------------------------')
     return nickname, classifier[0], classifier[1], classifierNum
 
 
@@ -290,36 +282,3 @@ def Batch_Testing(activeClassifier, activeDataset, sessionClassifiers, sessionDa
         print('|      or even shutdown of the program. I apologize for any       |')
         print('|      inconvenience.                                             |')
         print('-------------------------------------------------------------------')
-
-
-"""
-
-List of Classifiers:
-Random Forest
-K-Means
-KNeighborsClassifier
-LinearDiscriminantAnalysis (transform)
-NeighborhoodComponentsAnalysis (transform)
-Gradient Boosting Classifier
-Ada-Boost Classifier
-Bagging Classifier
-Isolation Forest Classifier
-Voting Classifier
-Stacking Classifier
-Gaussian Process Classifier
-Ridge Classifier
-Precision Recall Display (results)
-ROC Display (results)
-K Folds verification (results)
-Learning Curve display (results)
-Gaussian Naive Bayes
-Multinomial Naive Bayes
-Complement Naive Bayes
-Bernoulli Naive Bayes
-Categorical Naive Bayes
-Multi-layer Perceptron
-Linear SVM
-C-SVM
-Decision Trees Classifier
-
-"""

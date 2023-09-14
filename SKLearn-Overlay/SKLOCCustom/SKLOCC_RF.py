@@ -68,9 +68,18 @@ def Customization_RF(mods=None):
             elif parameter == 3:
                 print('-------------------------------------------------------------------')
                 print('|                    You selected "max_depth"                     |')
-                max_depth_input = int(input("| Select the number for max tree depth: "))
-                mods.update(max_depth=max_depth_input)
-                rf.set_params(**{'max_depth': max_depth_input})
+                print('|                   Parameters to choose below:                   |')
+                print('|                              -----                              |')
+                print('|  1. None (Default)                                              |')
+                print('|  2. Custom                                                      |')
+                max_depth_input = int(input("| Select the max tree depth option: "))
+                if max_depth_input == 1:
+                    mods.update(max_depth=None)
+                    rf.set_params(**{'max_depth': None})
+                elif max_depth_input == 2:
+                    max_depth_num = int(input("| Enter the number for max tree depth: "))
+                    mods.update(max_depth=max_depth_num)
+                    rf.set_params(**{'max_depth': max_depth_num})
             elif parameter == 4:
                 print('-------------------------------------------------------------------')
                 print('|                You selected "min_samples_split"                 |')
@@ -86,7 +95,7 @@ def Customization_RF(mods=None):
             elif parameter == 6:
                 print('-------------------------------------------------------------------')
                 print('|             You selected "min_weight_fraction_leaf"             |')
-                mwfl_input = int(input("| Select the minimum leaf weight: "))
+                mwfl_input = float(input("| Select the minimum leaf weight: "))
                 mods.update(min_weight_fraction_leaf=mwfl_input)
                 rf.set_params(**{'min_weight_fraction_leaf': mwfl_input})
             elif parameter == 7:
@@ -96,7 +105,7 @@ def Customization_RF(mods=None):
                 print('|                              -----                              |')
                 print('|  1. sqrt (Default)                                              |')
                 print('|  2. log2                                                        |')
-                print('|  3. Enter an int or float                                       |')
+                print('|  3. Custom                                                      |')
                 max_features_choice = int(input('|           Enter here or 0 if you changed your mind: '))
                 if max_features_choice == 1:
                     mods.update(max_features="sqrt")
@@ -117,7 +126,7 @@ def Customization_RF(mods=None):
             elif parameter == 9:
                 print('-------------------------------------------------------------------')
                 print('|               You selected "min_impurity_decrease"              |')
-                mid_input = int(input("| Select the impurity split threshold: "))
+                mid_input = float(input("| Select the impurity split threshold: "))
                 mods.update(min_impurity_decrease=mid_input)
                 rf.set_params(**{'min_impurity_decrease': mid_input})
             elif parameter == 10:
@@ -127,7 +136,7 @@ def Customization_RF(mods=None):
                 print('|                              -----                              |')
                 print('|  1. True                                                        |')
                 print('|  2. False                                                       |')
-                bootstrap_input = int(input('|           Enter here or 0 if you changed your mind: '))
+                bootstrap_input = int(input('| Select whether to use bootstrappign: '))
                 if bootstrap_input == 1:
                     mods.update(bootstrap=True)
                     rf.set_params(**{'bootstrap': True})
@@ -137,7 +146,17 @@ def Customization_RF(mods=None):
             elif parameter == 11:
                 print('-------------------------------------------------------------------')
                 print('|                     You selected "oob_score"                    |')
-                print('|  Callables have not be provided yet, so this is not available.  |')
+                print('|                   Parameters to choose below:                   |')
+                print('|                              -----                              |')
+                print('|  1. True                                                        |')
+                print('|  2. False                                                       |')
+                oob_score_input = int(input('| Select whether to use out-of-bag sample estimating: '))
+                if oob_score_input == 1:
+                    mods.update(oob_score=True)
+                    rf.set_params(**{'oob_score': True})
+                elif oob_score_input == 2:
+                    mods.update(oob_score=False)
+                    rf.set_params(**{'oob_score': False})
             elif parameter == 12:
                 print('-------------------------------------------------------------------')
                 print('|                       You selected "n_jobs"                     |')
@@ -181,7 +200,7 @@ def Customization_RF(mods=None):
                 print('|  0. None                                                        |')
                 print('|  1. Balanced                                                    |')
                 print('|  2. Enter a list of weights for classes                         |')
-                class_weight_choice = int(input('|           Enter here or 0 if you changed your mind: '))
+                class_weight_choice = int(input('| Select the class weight option: '))
                 if class_weight_choice == 1:
                     mods.update(class_weight="balanced")
                     rf.set_params(**{'class_weight': "balanced"})
@@ -193,7 +212,7 @@ def Customization_RF(mods=None):
             elif parameter == 17:
                 print('-------------------------------------------------------------------')
                 print('|                     You selected "ccp_alpha"                    |')
-                ccp_alpha_input = int(input("| Enter in your cost complexity threshold: "))
+                ccp_alpha_input = abs(float(input("| Enter in your cost complexity threshold: ")))
                 mods.update(ccp_alpha=ccp_alpha_input)
                 rf.set_params(**{'ccp_alpha': ccp_alpha_input})
             elif parameter == 18:
@@ -223,10 +242,10 @@ def Customization_RF(mods=None):
 def Set_Shiftlist(parameter, batchNum):
     shiftList = []
     print(f'|                  You selected {parameter}                    |')
-    parameter_start = int(input("| What is the starting number: "))
+    parameter_start = float(input("| What is the starting number: "))
 
     print('|  What interval would you like to use for adding/removing units? |')
-    intervalChange = int(input("| Input a positive number for increase and a negative number for  |\n| decrease: "))
+    intervalChange = float(input("| Input a positive number for increase and a negative number for  |\n| decrease: "))
     parameter_end = parameter_start + (intervalChange * (batchNum - 1))
 
     print(f'| The number of units will start at {parameter_start} for the first classifier.')
@@ -238,7 +257,7 @@ def Set_Shiftlist(parameter, batchNum):
     if choice == 1:
         for i in range(batchNum):
             shiftList.append(parameter_start)
-            parameter_start += intervalChange
+            parameter_start = round(parameter_start + intervalChange, 8)
         settingParam = False
     else:
         print('|             Confirmation unsuccessful. Trying again.            |')
@@ -294,7 +313,7 @@ def Mod_List_RF(batchNum, classMods=None):
                 settingParam = sp
 
                 for num in shiftList:
-                    workingMods.update(n_estimators=num)
+                    workingMods.update(n_estimators=int(num))
                     rf = RandomForestClassifier()
 
                     for parameter, setting in workingMods.items():
@@ -321,7 +340,7 @@ def Mod_List_RF(batchNum, classMods=None):
                 settingParam = sp
 
                 for num in shiftList:
-                    workingMods.update(max_depth=num)
+                    workingMods.update(max_depth=int(num))
                     rf = RandomForestClassifier()
 
                     for parameter, setting in workingMods.items():
@@ -333,7 +352,7 @@ def Mod_List_RF(batchNum, classMods=None):
                 settingParam = sp
 
                 for num in shiftList:
-                    workingMods.update(min_samples_split=num)
+                    workingMods.update(min_samples_split=int(num))
                     rf = RandomForestClassifier()
 
                     for parameter, setting in workingMods.items():
@@ -345,7 +364,7 @@ def Mod_List_RF(batchNum, classMods=None):
                 settingParam = sp
 
                 for num in shiftList:
-                    workingMods.update(min_samples_leaf=num)
+                    workingMods.update(min_samples_leaf=int(num))
                     rf = RandomForestClassifier()
 
                     for parameter, setting in workingMods.items():
@@ -393,7 +412,7 @@ def Mod_List_RF(batchNum, classMods=None):
                 settingParam = sp
 
                 for num in shiftList:
-                    workingMods.update(max_leaf_nodes=num)
+                    workingMods.update(max_leaf_nodes=int(num))
                     rf = RandomForestClassifier()
 
                     for parameter, setting in workingMods.items():
@@ -437,7 +456,7 @@ def Mod_List_RF(batchNum, classMods=None):
                 settingParam = sp
 
                 for num in shiftList:
-                    workingMods.update(n_jobs=num)
+                    workingMods.update(n_jobs=int(num))
                     rf = RandomForestClassifier()
 
                     for parameter, setting in workingMods.items():
@@ -480,7 +499,7 @@ def Mod_List_RF(batchNum, classMods=None):
                 settingParam = sp
 
                 for num in shiftList:
-                    workingMods.update(max_samples=num)
+                    workingMods.update(max_samples=int(num))
                     rf = RandomForestClassifier()
 
                     for parameter, setting in workingMods.items():

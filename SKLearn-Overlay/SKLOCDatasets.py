@@ -192,16 +192,15 @@ def Dataset_Setup_Sample(nickname):
     print('|  1. California Housing                                          |')
     print('|  2. Cover Type                                                  |')
     print('|  3. Breast Cancer                                               |')
-    print('|  4. Diabetes                                                    |')
-    print('|  5. Digits                                                      |')
-    print('|  6. Iris Plants                                                 |')
-    print('|  7. Wine                                                        |')
-    print('|  8. Random Dataset Generation                                   |')
-    print('|  9. Circle Generation                                           |')
-    print('| 10. Random Binary (Hastie) Generation                           |')
-    print('| 11. Moon Generation                                             |')
-    print('| 12. Cool S Generation                                           |')
-    print('| 13. Swiss Roll Generation                                       |')
+    print('|  4. Digits                                                      |')
+    print('|  5. Iris Plants                                                 |')
+    print('|  6. Wine                                                        |')
+    print('|  7. Random Dataset Generation                                   |')
+    print('|  8. Circle Generation                                           |')
+    print('|  9. Random Binary (Hastie) Generation                           |')
+    print('| 10. Moon Generation                                             |')
+    print('| 11. Cool S Generation                                           |')
+    print('| 12. Swiss Roll Generation                                       |')
     try:
         choice = int(input('|                      Enter number here: '))
         if choice == 0:
@@ -216,28 +215,25 @@ def Dataset_Setup_Sample(nickname):
             sample = ds.load_breast_cancer()
             sampleDF = Dataframe_Processing(sample, yCol='Diagnosis')
         elif choice == 4:
-            sample = ds.load_diabetes()
-            sampleDF = Dataframe_Processing(sample, yCol='Progress')
-        elif choice == 5:
             sample = ds.load_digits()
             sampleDF = Dataframe_Processing(sample, yCol='Number')
-        elif choice == 6:
+        elif choice == 5:
             sample = ds.load_iris()
             sampleDF = Dataframe_Processing(sample, yCol='Plant')
-        elif choice == 7:
+        elif choice == 6:
             sample = ds.load_wine()
             sampleDF = Dataframe_Processing(sample, yCol='Wine')
-        elif choice == 8:
+        elif choice == 7:
             sampleDF = Make_Class_Configuration()
-        elif choice == 9:
+        elif choice == 8:
             sampleDF = Make_Circles_Configuration()
-        elif choice == 10:
+        elif choice == 9:
             sampleDF = Make_Hastie_Configuration()
-        elif choice == 11:
+        elif choice == 10:
             sampleDF = Make_Moons_Configuration()
-        elif choice == 12:
+        elif choice == 11:
             sampleDF = Make_S_Configuration()
-        elif choice == 13:
+        elif choice == 12:
             sampleDF = Make_Swiss_Roll_Configuration()
         else:
             print('|          Unrecognized option chosen. Please try again.          |')
@@ -260,6 +256,13 @@ def Dataset_Setup_Sample(nickname):
 
 
 def Dataset_Setup_Local(nickname, filePath):
+    # Being kind to user
+    if filePath.startswith('"'):
+        filePath = filePath[1:]
+
+    if filePath.endswith('"'):
+        filePath = filePath[:-1]
+
     print(f'| Dataset: {filePath}')
 
     extension = filePath.split('.')[-1]

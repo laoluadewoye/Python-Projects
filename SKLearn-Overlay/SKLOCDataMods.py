@@ -105,6 +105,7 @@ def Select_Preprocess(dataMods):
     print('|  6. Robust Scaler                                               |')
     print('|  7. Standard Scaler                                             |')
     print('|  8. Principal Component Analysis (PCA)                          |')
+    print('|  9. Neighborhood Components Analysis (NCA)                      |')
     choice = int(input('|                      Enter number here: '))
 
     if choice == 1:
@@ -124,7 +125,11 @@ def Select_Preprocess(dataMods):
     elif choice == 8:
         dataMods['Preprocess'] = 'PCA'
         choice = int(input('|              Enter number of components here: '))
-        dataMods['PCA_comp_count'] = choice
+        dataMods['Comp_count'] = choice
+    elif choice == 9:
+        dataMods['Preprocess'] = 'NCA'
+        choice = int(input('|              Enter number of components here: '))
+        dataMods['Comp_count'] = choice
     else:
         print('|          Unrecognized option chosen. Please try again.          |')
 
@@ -132,12 +137,11 @@ def Select_Preprocess(dataMods):
 
 
 def Dataset_Config(nickname, dataset, dataMods=None):
-    if dataMods is None:
-        dataMods = {}
-
-    makingEdits = True
     YSelected = False
     TTSelected = False
+
+    if dataMods is None:
+        dataMods = {}
 
     # Default configuration
     if dataMods == {}:
@@ -147,17 +151,24 @@ def Dataset_Config(nickname, dataset, dataMods=None):
             'Train_test_option': None,
             'Split_train_perc': None,
             'Preprocess': None,
-            'PCA_comp_count': None
+            'Comp_count': None
         }
 
+    if dataMods['Y_column'] is not None:
+        YSelected = True
+    if dataMods['Train_test_option'] is not None:
+        TTSelected = True
+
     workingCopy = deepcopy(dataset)
+
+    makingEdits = True
 
     while makingEdits:
         print(f'| Dataset: {nickname}')
         print(f'| Removed Columns: {dataMods["Stripped_columns"]}')
         print(f'| Classifier Column: {dataMods["Y_column"]}')
         print(f'| Train-Test Method: {dataMods["Train_test_option"]} ({dataMods["Split_train_perc"]})')
-        print(f'| Preprocessing Method: {dataMods["Preprocess"]} ({dataMods["PCA_comp_count"]})')
+        print(f'| Preprocessing Method: {dataMods["Preprocess"]} ({dataMods["Comp_count"]})')
         print('|                                                                 |')
         print('|                   Choose what you want to do!                   |')
         print('|           All leftover columns (aside from the set Y)           |')
@@ -187,7 +198,7 @@ def Dataset_Config(nickname, dataset, dataMods=None):
                     'Train_test_option': None,
                     'Split_train_perc': None,
                     'Preprocess': None,
-                    'PCA_comp_count': None
+                    'Comp_count': None
                 }
                 print('|                   Dataset Modifications Reset                   |')
                 print('-------------------------------------------------------------------')

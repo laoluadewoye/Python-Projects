@@ -1,7 +1,14 @@
 from os.path import exists, isdir
 from numpy import unique
+from numpy.random import rand
 import matplotlib.pyplot as plt
 import pandas as pd
+from openpyxl import load_workbook
+try:
+    from openpyxl.cell import get_column_letter
+except ImportError:
+    from openpyxl.utils import get_column_letter
+    from openpyxl.utils import column_index_from_string
 from sklearn.metrics import *
 
 
@@ -12,7 +19,7 @@ def Send_To_Excel(scoreList, nickname, path=''):
     scoreListLabels = ['Name', 'Classifier', 'Total_Predictions', 'Unique_Classifications', 'Correct_Predictions',
                        'Incorrect_Predictions', 'Accuracy', 'Balanced_Accuracy', 'Precision', 'Recall', 'F1_Score',
                        'F_Beta Score', 'Phi_Score', 'Hamming_Loss', 'Mean_Absolute_Error', 'Mean_Squared_Error',
-                       'Loss']
+                       'Loss', 'Execution Time']
 
     resultsDF = pd.DataFrame(scoreList, columns=scoreListLabels)
 
@@ -30,6 +37,21 @@ def Send_To_Excel(scoreList, nickname, path=''):
             break
 
     resultsDF.to_excel(fileName)
+
+    # ADJUSTING COLUMNS (RIPPED FROM STACK OVERFLOW)
+    # Importing the necessary modules
+    resultsWB = load_workbook(fileName)
+    for sheet_name in resultsWB.sheetnames:
+        for column_cells in resultsWB[sheet_name].columns:
+            # Max length inside tuple of strings made from data contained in each cell of a column
+            new_column_length = max(len(str(cell.value)) for cell in column_cells)
+            new_column_letter = (get_column_letter(column_cells[0].column))
+            if new_column_length > 0:
+                columnBuffer = 1.23
+                resultsWB[sheet_name].column_dimensions[new_column_letter].width = new_column_length * columnBuffer
+    resultsWB.save(fileName)
+    # ADJUSTING COLUMNS (RIPPED FROM STACK OVERFLOW)
+
     print(resultsDF)
 
 
@@ -55,14 +77,22 @@ def Generate_All_Charts(allResults, nickname, path):
     scoreListLabels = ['Name', 'Classifier', 'Total_Predictions', 'Unique_Classifications', 'Correct_Predictions',
                        'Incorrect_Predictions', 'Accuracy', 'Balanced_Accuracy', 'Precision', 'Recall', 'F1_Score',
                        'F_Beta Score', 'Phi_Score', 'Hamming_Loss', 'Mean_Absolute_Error', 'Mean_Squared_Error',
-                       'Loss']
+                       'Loss', 'Execution Time']
 
     resultsDF = pd.DataFrame(allResults, columns=scoreListLabels)
+    colorList = []
+    for i in range(resultsDF.shape[0]):
+        colorList.append(rand(3))
 
     for i in range(4, len(scoreListLabels)):
-        resultsDF.plot(x='Name', y=scoreListLabels[i], kind='bar')
+        resultsDF.plot(
+            x='Name',
+            y=scoreListLabels[i],
+            kind='bar',
+            color=colorList,
+            legend=None)
 
-        #Filenaming
+        # Filenaming
         if path == 'Default':
             path = ''
 
@@ -75,15 +105,29 @@ def Generate_All_Charts(allResults, nickname, path):
             else:
                 break
 
+        # Adjusting y-axis to be easier to see differences
+        yRange = resultsDF[scoreListLabels[i]]
+        bufferPerc = 0.25
+        buffer = (yRange.max() - yRange.min()) * bufferPerc + 0.05
+        yMin = yRange.min() - buffer
+        if yMin < 0:
+            yMin = 0
+        yMax = yRange.max() + buffer
+        plt.ylim((yMin, yMax))
+
         # Fine tuning visuals
         plt.title(scoreListLabels[i] + " Comparison")
         plt.xlabel("Classifiers")
         plt.ylabel("Scores/Percentages")
+        plt.xticks(rotation=30)
         plt.tight_layout()
+        for i, v, in enumerate(yRange.tolist()):
+            plt.text(i, v, str(v), ha="center")
+
         plt.savefig(fileName)
 
 
-def Results_Return(y_test, y_guess, specNickName, classifier):
+def Results_Return(y_test, y_guess, specNickName, classifier, elapsed):
     # Stats
     tolCount = len(y_guess)
     uniCount = len(unique(y_test))
@@ -108,19 +152,20 @@ def Results_Return(y_test, y_guess, specNickName, classifier):
         fBScore = round(fbeta_score(y_test, y_guess, beta=0.5, average="binary") * 100, 2)
 
     scoreList = [specNickName, str(classifier), tolCount, uniCount, accCount, zeroOneCount, accScore, balAccScore,
-                 precScore, recScore, f1Score, fBScore, phiScore, hammLossScore, maeScore, mseScore, zeroOneLossScore]
+                 precScore, recScore, f1Score, fBScore, phiScore, hammLossScore, maeScore, mseScore, zeroOneLossScore,
+                 elapsed]
 
     return scoreList
 
 
-def Results(y_test, y_guess, nickname, classifier):
+def Results(y_test, y_guess, nickname, classifier, elapsed):
     inReview = True
     resultsSent = False
     CMGenerated = False
     exportLocation = 'Default'
 
     # Stats
-    scoreList = Results_Return(y_test, y_guess, nickname, classifier)
+    scoreList = Results_Return(y_test, y_guess, nickname, classifier, elapsed)
 
     tolCount = scoreList[2]
     uniCount = scoreList[3]
@@ -142,6 +187,7 @@ def Results(y_test, y_guess, nickname, classifier):
         print(f'| Selected Folder: {exportLocation}')
         print('|                        Core Statistics:                         |')
         print('|                              -----                              |')
+        print(f'| Execution Time: {elapsed} seconds')
         print(f'| Total Predictions: {tolCount}')
         print(f'| Correct Predictions: {accCount}')
         print(f'| Incorrect Predictions: {zeroOneCount}')
