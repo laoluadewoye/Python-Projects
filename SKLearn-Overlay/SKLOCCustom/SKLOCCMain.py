@@ -1,8 +1,8 @@
-from SKLOCCustom.SKLOCC_RF import *
-from SKLOCCustom.SKLOCC_KN import *
-from SKLOCCustom.SKLOCC_SVM import *
-from SKLOCCustom.SKLOCC_SVML import *
-from SKLOCCustom.SKLOCC_MLP import *
+from .SKLOCC_RF import *
+from .SKLOCC_KN import *
+from .SKLOCC_SVM import *
+from .SKLOCC_SVML import *
+from .SKLOCC_MLP import *
 
 
 def Customize_Classifier_Batch(actClassInfo, batchNum):
