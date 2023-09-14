@@ -60,12 +60,12 @@ def Save_CM(y_test, y_guess, nickname, classifier, path=''):
     cmDisplay = ConfusionMatrixDisplay(confusion_matrix=cm, display_labels=classifier.classes_)
     cmDisplay.plot()
 
-    fileName = path + nickname + ".png"
+    fileName = path + nickname + "_CM.png"
     cloneNum = 0
     while True:
         if exists(fileName):
             cloneNum += 1
-            fileName = path + nickname + str(cloneNum) + ".png"
+            fileName = path + nickname + "_" + str(cloneNum) + "_CM.png"
         else:
             break
 

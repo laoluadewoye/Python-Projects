@@ -153,6 +153,9 @@ def Auto_Fit_Test(dataPartitions, nameList, classList, folder):
 
         y_guess = classifier.predict(X_test)
         specNickName = f'{nickname}_{i}'
+
+        Save_CM(y_test, y_guess, specNickName, classifier, folder)
+
         resultList = Results_Return(y_test, y_guess, specNickName, classifier, elapsed)
         allResults.append(resultList)
 
