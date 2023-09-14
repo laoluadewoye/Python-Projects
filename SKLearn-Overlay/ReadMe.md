@@ -7,17 +7,6 @@ All copyright information on the GitHub page.
 If there are any questions on the usage of this program, please feel free to 
 email me.
 
-# Table of Contents
-
-### [Background](#background)
-
-### [File Information](#file-information)
-
-### [Prerequisites](#prerequisites)
-
-### [Starting the Program](#starting-the-program)
-
-
 # Hello, Welcome To SKLOverlay
 
 ## BACKGROUND
