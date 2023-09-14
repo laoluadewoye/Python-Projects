@@ -1,3 +1,7 @@
+Created by: Laolu Ade
+
+Version 1.1.0
+
 ## Installation Instructions ##
 
 Download the SKLO folder in your desired location.
