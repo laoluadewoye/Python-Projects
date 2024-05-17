@@ -1,0 +1,88 @@
+index: 0
+timestamp: 2024-01-12 21:40:49
+data: Apple Genesis Block
+previous_hash: 0
+hash: c3f37575898d8ee0e3acb6d3657b6b5d489a939599bee4b46ed7fb3c34a81a20
+color: darkgoldenrod
+Product Data: 
+
+index: 1
+timestamp: 2024-01-12 21:40:49
+data: 019594997023
+previous_hash: c3f37575898d8ee0e3acb6d3657b6b5d489a939599bee4b46ed7fb3c34a81a20
+hash: c649fde101e77f54ab92b67dd9d68def38aac85e1cab94db47b719bd0099be8d
+color: olive
+Product Data: {"Company":"Apple","Category":"Mac","Common_Name":"Macbook Air","Year":2023,"Model":"MQKP3xx\/A"}
+
+index: 2
+timestamp: 2024-01-12 21:40:49
+data: 019594936752
+previous_hash: c649fde101e77f54ab92b67dd9d68def38aac85e1cab94db47b719bd0099be8d
+hash: e14062978969fa16b7579b5f256a44c610c7d35d9f030e0c7fa778b6bbcfceec
+color: mediumvioletred
+Product Data: {"Company":"Apple","Category":"Mac","Common_Name":"Macbook Pro","Year":2023,"Model":"MR7J3LL\/A"}
+
+index: 3
+timestamp: 2024-01-12 21:40:49
+data: 019594975599
+previous_hash: e14062978969fa16b7579b5f256a44c610c7d35d9f030e0c7fa778b6bbcfceec
+hash: 1f1d9bfc0da6eab192637cafde5f7fe6a15a145e122bee4a6ede08acf08acd75
+color: darkorchid
+Product Data: {"Company":"Apple","Category":"Mac","Common_Name":"iMac","Year":2023,"Model":"MQRJ3xx\/A"}
+
+index: 4
+timestamp: 2024-01-12 21:40:49
+data: 019594903613
+previous_hash: 1f1d9bfc0da6eab192637cafde5f7fe6a15a145e122bee4a6ede08acf08acd75
+hash: 61fce1a8330f3ee45bc0cda88159e2e04bc6b0d4d644f82e00b51fa32279425b
+color: khaki
+Product Data: {"Company":"Apple","Category":"iPad","Common_Name":"iPad Air","Year":2022,"Model":"A2588"}
+
+index: 5
+timestamp: 2024-01-12 21:40:49
+data: 019594921202
+previous_hash: 61fce1a8330f3ee45bc0cda88159e2e04bc6b0d4d644f82e00b51fa32279425b
+hash: c424d761ad2e6b59371060fddd7cdda5da06fe2f13b65b50d38ec18215a0b086
+color: cyan
+Product Data: {"Company":"Apple","Category":"iPhone","Common_Name":"iPhone 15","Year":2023,"Model":"A2846"}
+
+index: 6
+timestamp: 2024-01-12 21:40:49
+data: 019594991524
+previous_hash: c424d761ad2e6b59371060fddd7cdda5da06fe2f13b65b50d38ec18215a0b086
+hash: 02ae954220abfc298e19e4f8c7ba879af77decc6d21f7f7d070994e588f881de
+color: red
+Product Data: {"Company":"Apple","Category":"iPhone","Common_Name":"iPhone SE","Year":2020,"Model":"A2275"}
+
+index: 7
+timestamp: 2024-01-12 21:40:49
+data: 019594950543
+previous_hash: 02ae954220abfc298e19e4f8c7ba879af77decc6d21f7f7d070994e588f881de
+hash: 831bb73e8c6215f8cb5530ded80bf4320e59a25434774fb237ec2202e56a74f0
+color: darkturquoise
+Product Data: {"Company":"Apple","Category":"Watch","Common_Name":"Apple Watch 9","Year":2023,"Model":"A2978"}
+
+index: 8
+timestamp: 2024-01-12 21:40:49
+data: 019594977939
+previous_hash: 831bb73e8c6215f8cb5530ded80bf4320e59a25434774fb237ec2202e56a74f0
+hash: cb6595c46ab8dae6c98f0f43889caa1be9a3adc894663edea4d70be9c82a0a5a
+color: darkslateblue
+Product Data: {"Company":"Apple","Category":"AirPods","Common_Name":"AirPods (3rd Gen)","Year":2021,"Model":"A2565"}
+
+index: 9
+timestamp: 2024-01-12 21:40:49
+data: 019594938145
+previous_hash: cb6595c46ab8dae6c98f0f43889caa1be9a3adc894663edea4d70be9c82a0a5a
+hash: 7d60166e58fa12ae53cd0cf8429a53369059fb7b8603e8c5be2f295f37f50a9a
+color: lightslategray
+Product Data: {"Company":"Apple","Category":"AirPods","Common_Name":"AirPods Pro (2nd Gen)","Year":2022,"Model":"A2931"}
+
+index: 10
+timestamp: 2024-01-12 21:40:49
+data: 019594970107
+previous_hash: 7d60166e58fa12ae53cd0cf8429a53369059fb7b8603e8c5be2f295f37f50a9a
+hash: cb407fb84f509157dcdadb8990aa36ed441ddef1a23dbacf40db7a91656a3a41
+color: mediumseagreen
+Product Data: {"Company":"Apple","Category":"AirPods","Common_Name":"AirPods Max","Year":2020,"Model":"A2096"}
+

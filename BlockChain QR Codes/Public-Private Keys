@@ -1,0 +1,19 @@
+user 1: public 1, private 1
+user 2: public 2, private 2
+
+u1 --> give public key to u2
+u2 --> give public key to u1
+
+u1 wants to send something to u2
+
+u1 secures file with public 2
+u1 creates hash from SECURE file
+u1 secures hash with private 1
+
+u1 sends --> pu2(file)pu2--pi1(hash)pi1
+
+u2 receives encrypted file and encrypted hash from u1
+
+u2 decrypts hash with public 1
+u2 checks hash with reference hash. Hash is correct.
+u2 decrypts file with private 2

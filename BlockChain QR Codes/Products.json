@@ -1,0 +1,72 @@
+[
+  {
+    "Company": "Apple",
+    "Category": "Mac",
+    "Common_Name": "Macbook Air",
+    "Year": 2023,
+    "Model": "MQKP3xx/A"
+  },
+  {
+    "Company": "Apple",
+    "Category": "Mac",
+    "Common_Name": "Macbook Pro",
+    "Year": 2023,
+    "Model": "MR7J3LL/A"
+  },
+  {
+    "Company": "Apple",
+    "Category": "Mac",
+    "Common_Name": "iMac",
+    "Year": 2023,
+    "Model": "MQRJ3xx/A"
+  },
+  {
+    "Company": "Apple",
+    "Category": "iPad",
+    "Common_Name": "iPad Air",
+    "Year": 2022,
+    "Model": "A2588"
+  },
+  {
+    "Company": "Apple",
+    "Category": "iPhone",
+    "Common_Name": "iPhone 15",
+    "Year": 2023,
+    "Model": "A2846"
+  },
+  {
+    "Company": "Apple",
+    "Category": "iPhone",
+    "Common_Name": "iPhone SE",
+    "Year": 2020,
+    "Model": "A2275"
+  },
+  {
+    "Company": "Apple",
+    "Category": "Watch",
+    "Common_Name": "Apple Watch 9",
+    "Year": 2023,
+    "Model": "A2978"
+  },
+  {
+    "Company": "Apple",
+    "Category": "AirPods",
+    "Common_Name": "AirPods (3rd Gen)",
+    "Year": 2021,
+    "Model": "A2565"
+  },
+  {
+    "Company": "Apple",
+    "Category": "AirPods",
+    "Common_Name": "AirPods Pro (2nd Gen)",
+    "Year": 2022,
+    "Model": "A2931"
+  },
+  {
+    "Company": "Apple",
+    "Category": "AirPods",
+    "Common_Name": "AirPods Max",
+    "Year": 2020,
+    "Model": "A2096"
+  }
+]
